@@ -5,6 +5,7 @@ const app = express()
 app.use(express.json())
 
 app.use(cors())
+app.use(express.static('build'))
 let notes = [
   {
     id: 1,
@@ -30,10 +31,6 @@ const generateId = () => {
   const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0
   return maxId + 1
 }
-
-app.get('/', (req, res) => {
-  res.send('<h1>Hello</h1>')
-})
 
 app.get('/api/notes', (req, res) => {
   res.json(notes)
